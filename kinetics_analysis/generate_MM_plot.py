@@ -20,7 +20,7 @@ sub_conc_dense = np.linspace(0, max(sub_conc)*100, 10000)
 def michaelis_menten(sub_conc, kcat, Km):
     return (kcat * sub_conc) / (Km + sub_conc)
 
-parameters, _ = curve_fit(michaelis_menten, sub_conc, reaction_rate)
+parameters, _ = curve_fit(michaelis_menten, sub_conc, reaction_rate, bounds =(0, np.inf))
 kcat, Km = parameters
 
 # Plot the data points and the fitted curve
@@ -32,9 +32,10 @@ plt.ylabel('Reaction rate')
 # set limits
 xvals = sub_conc.tolist()
 xvals.append(Km * 2)
-plt.xlim(0, max(xvals))
+plt.xlim(0, max(xvals) * 1.1)
 plt.ylim(0, kcat * 1.1)
 
+#plt.show()
 # Add a dashed vertical line for Km
 intersection = np.argwhere(np.diff(np.sign(sub_conc_dense - [Km] *10000))).flatten()
 y_of_Km = michaelis_menten(sub_conc_dense[intersection], kcat, Km)
@@ -44,7 +45,7 @@ plt.vlines(x=Km, ymin=0, ymax=y_of_Km, linestyle='dashed', label='Km', colors ='
 plt.text(Km * 1.1, y_of_Km / 2, 'Km = {:.3f}'.format(Km), ha='left', va='bottom')
 
 # Add a dashed horizontal line for kcat
-plt.hlines(y=kcat, xmin=0, xmax=max(xvals), linestyle='dashed', label='kcat', colors ='grey')
+plt.hlines(y=kcat, xmin=0, xmax=max(xvals) * 1.1, linestyle='dashed', label='kcat', colors ='grey')
 
 # Annotate kcat
 plt.text(max(sub_conc) /2, kcat, 'kcat = {:.3f}'.format(kcat), ha='center', va='bottom')
