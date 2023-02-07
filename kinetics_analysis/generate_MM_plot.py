@@ -35,7 +35,6 @@ xvals.append(Km * 2)
 plt.xlim(0, max(xvals) * 1.1)
 plt.ylim(0, kcat * 1.1)
 
-#plt.show()
 # Add a dashed vertical line for Km
 intersection = np.argwhere(np.diff(np.sign(sub_conc_dense - [Km] *10000))).flatten()
 y_of_Km = michaelis_menten(sub_conc_dense[intersection], kcat, Km)
