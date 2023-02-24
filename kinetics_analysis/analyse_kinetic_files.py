@@ -7,9 +7,9 @@ directory = './mockdata'
 enzyme_conc = 50 /1000 /1000
 
 def average_column(file1, file2):
-    # Read in data from file1 and file2, ignore first row
-    df1 = pd.read_csv(file1, skiprows=[0], index_col=0)
-    df2 = pd.read_csv(file2, skiprows=[0], index_col=0)
+    # Read in data from file1 and file2, ignore first row and spaces after comma
+    df1 = pd.read_csv(file1, skiprows=[0], index_col=0, skipinitialspace=True)
+    df2 = pd.read_csv(file2, skiprows=[0], index_col=0, skipinitialspace=True)
 
     # Calculate average for each row of second column
     averages = (df1.iloc[:, 0] + df2.iloc[:, 0]) / 2
