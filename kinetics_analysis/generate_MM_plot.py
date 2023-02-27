@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 import numpy as np
 
-# Define directory 
-directory = './mockdata'
+# Define directory
+directory = '/Users/max/Downloads/eugokineticsfiles25200umsubstrate/mockdata/'
 
 #import data
 df = pd.read_csv(f"{directory}/result.csv")
@@ -29,11 +29,9 @@ plt.plot(sub_conc_dense, michaelis_menten(sub_conc_dense, kcat, Km), 'r', label=
 plt.xlabel('Substrate concentration')
 plt.ylabel('Reaction rate')
 
-# set limits
-xvals = sub_conc.tolist()
-xvals.append(Km * 2)
-plt.xlim(0, max(xvals) * 1.1)
-plt.ylim(0, kcat * 1.1)
+# set axis limits slightly beyond the biggest measurement or parameter
+plt.xlim(0, 1.1 * max(sub_conc.tolist() + [Km]))
+plt.ylim(0, 1.1 *  max(reaction_rate.tolist() + [kcat]))
 
 # Add a dashed vertical line for Km
 intersection = np.argwhere(np.diff(np.sign(sub_conc_dense - [Km] *10000))).flatten()
