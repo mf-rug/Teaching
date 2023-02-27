@@ -4,7 +4,7 @@ from scipy.optimize import curve_fit
 import numpy as np
 
 # Define directory
-directory = '/Users/max/Downloads/eugokineticsfiles25200umsubstrate/mockdata/'
+directory = './mockdata/'
 
 #import data
 df = pd.read_csv(f"{directory}/result.csv")
