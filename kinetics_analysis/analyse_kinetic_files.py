@@ -3,17 +3,15 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 
 # Define directory & enzyme concentration used (in mM)
-directory = './mockdata'
+directory = '/Users/max/Downloads/eugokineticsfiles25200umsubstrate/mockdata/'
 enzyme_conc = 50 /1000 /1000
 
 def average_column(file1, file2):
-    # Read in data from file1 and file2, ignore first row and spaces after comma
+    # Read in data from file1 and file2, ignore first row
     df1 = pd.read_csv(file1, skiprows=[0], index_col=0, skipinitialspace=True)
     df2 = pd.read_csv(file2, skiprows=[0], index_col=0, skipinitialspace=True)
-
     # Calculate average for each row of second column
     averages = (df1.iloc[:, 0] + df2.iloc[:, 0]) / 2
-
     # Return averages, remove empty lines from data
     return averages[averages.notna()]
 
@@ -25,10 +23,10 @@ for filename in os.listdir(directory):
    if filename.endswith('1.txt'):
         # Extract number and file extension from filename
         parts = filename.split("_")
-        name,conc = parts[0], int(parts[1])
+        name,conc = parts[0], float(parts[1])
 
-        file1 = f"{directory}/{name}_{conc}_1.txt"
-        file2 = f"{directory}/{name}_{conc}_2.txt"
+        file1 = f"{directory}/{name}_{conc:g}_1.txt"
+        file2 = f"{directory}/{name}_{conc:g}_2.txt"
 
         # Apply custom function and store in df
         avg = average_column(file1, file2)
