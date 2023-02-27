@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 
 # Define directory & enzyme concentration used (in mM)
-directory = '/Users/max/Downloads/eugokineticsfiles25200umsubstrate/mockdata/'
+directory = './mockdata/'
 enzyme_conc = 50 /1000 /1000
 
 def average_column(file1, file2):
