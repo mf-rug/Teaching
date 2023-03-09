@@ -42,7 +42,7 @@ plt.vlines(x=Km, ymin=0, ymax=y_of_Km, linestyle='dashed', label='Km', colors ='
 plt.text(Km * 1.1, y_of_Km / 2, 'Km = {:.3f}'.format(Km), ha='left', va='bottom')
 
 # Add a dashed horizontal line for kcat
-plt.hlines(y=kcat, xmin=0, xmax=max(xvals) * 1.1, linestyle='dashed', label='kcat', colors ='grey')
+plt.hlines(y=kcat, xmin=0, xmax=1.1 * max(sub_conc.tolist() + [Km]), linestyle='dashed', label='kcat', colors ='grey')
 
 # Annotate kcat
 plt.text(max(sub_conc) /2, kcat, 'kcat = {:.3f}'.format(kcat), ha='center', va='bottom')
